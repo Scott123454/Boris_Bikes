@@ -1,6 +1,8 @@
 Boris_Bikes
 ===========
 
+This is a second attempt at Boris Bikes and supercedes the previous Boris Bikes repository
+
 This code models the London Boris Bikes system.
 
 The projects assumes the following:
