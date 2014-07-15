@@ -8,4 +8,8 @@ class Garage
 		@bikes = bikes
 	end
 
+	def fix_bikes
+		@bikes.first.fix!
+	end
+
 end

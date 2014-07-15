@@ -4,8 +4,11 @@ require_relative 'bike_container_spec'
 describe Garage do
 	it_behaves_like BikeContainer
 
-	# 'it can be created with bikes' do
-	# 	expect(Garage.new([:bike])).to have_bikes
-	# end
+	it 'fixes bikes' do
+		bike = double :bike
+		garage = Garage.new([bike])
+		expect(bike).to receive(:fix!)
+		garage.fix_bikes
+	end
 end
 
