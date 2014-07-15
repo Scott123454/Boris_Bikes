@@ -1,13 +1,12 @@
-class Van
+require_relative 'bike_container'
 
+class Van
+	include BikeContainer
+	alias :fixed_bikes :available_bikes
 	attr_reader :bikes
 
 	def initialize(bikes=[])
 		@bikes = bikes
-	end
-
-	def has_bikes?
-		@bikes.any?
 	end
 
 	def pickup_broken_bikes_from(place)
@@ -15,7 +14,16 @@ class Van
 	end
 
 	def drop_broken_bikes_into(place)
-		@bikes.select {|bike| bike.broken?}.each{|bike| place.dock(@bikes.delete(bike))}
+		broken_bikes.each do|bike| 
+			place.dock(release(bike))
+		end
 	end
+
+	def drop_bikes_into(place)
+		fixed_bikes.each do|bike| 
+			place.dock(release(bike))
+		end
+	end
+
 
 end
