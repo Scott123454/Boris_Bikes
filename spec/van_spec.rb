@@ -49,4 +49,9 @@ describe Van do
 		van.drop_bikes_into(place)
 	end
 
+	it 'bikes can be loaded into a van' do
+		van.load(:bike)
+		expect(van).to have_bikes
+	end
+
 end
