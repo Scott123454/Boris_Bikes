@@ -6,6 +6,10 @@ module BikeContainer
 		@bikes.any?
 	end
 
+	def bikes
+		@bikes
+	end
+
 	def broken_bikes
 		@bikes.select(&BROKEN_BIKE_SELECTOR)
 	end
@@ -22,7 +26,7 @@ module BikeContainer
 	def release_bike
 		release(available_bikes.pop)
 	end
-	
+
 	def available_bikes
 		@bikes.reject(&BROKEN_BIKE_SELECTOR)
 	end
@@ -32,7 +36,7 @@ module BikeContainer
 	end
 
 	def drop_bikes_into(place)
-		drop_into(place, fixed_bikes)
+		drop_into(place, available_bikes)
 	end
 
 	def drop_into(place, bike_type)
