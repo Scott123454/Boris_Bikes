@@ -17,4 +17,8 @@ class Person
 		self
 	end
 
+	def return_bike_to(station)
+		@bike = station.dock(@bike)
+	end
+
 end
