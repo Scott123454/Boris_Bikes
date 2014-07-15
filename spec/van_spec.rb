@@ -49,5 +49,4 @@ describe Van do
 		van.drop_bikes_into(place)
 	end
 
-
 end
