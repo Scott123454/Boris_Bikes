@@ -16,4 +16,9 @@ class DockingStation
 		@bikes.reject {|bike| bike.broken?}
 	end
 
+	def dock(bike)
+		@bikes << bike
+		nil
+	end
+
 end

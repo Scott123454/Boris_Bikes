@@ -29,7 +29,14 @@ describe DockingStation do
 	end
 
 	it 'can dock a bike' do
+		station = DockingStation.new
+		station.dock(:bike)
+		expect(station).to have_bikes
+	end
 
+	it 'bike returned and nil returned from dock method' do
+		station=DockingStation.new
+		expect(station.dock(:bike)).to be_nil
 	end
 
 end
