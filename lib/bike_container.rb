@@ -2,6 +2,14 @@ module BikeContainer
 
 	BROKEN_BIKE_SELECTOR = ->(bike){bike.broken?}
 
+	def capacity
+		@capacity
+	end
+
+	def full?
+		@bikes.count == capacity
+	end
+
 	def has_bikes?
 		@bikes.any?
 	end
@@ -19,7 +27,8 @@ module BikeContainer
 	end
 
 	def dock(bike)
-		@bikes << bike
+		raise "FULL" if full?
+		@bikes << bike 
 		nil
 	end
 	

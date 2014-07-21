@@ -5,6 +5,15 @@ shared_examples BikeContainer do
 	let(:bike) {double :bike, broken?: false}
 	let(:filled_container){described_class.new([bike])}
 
+	it 'is not full' do
+		expect(container).not_to be_full
+	end
+
+	it 'can only be filled up to capacity' do
+		times = container.capacity + 1
+		expect{times.times {container.dock(:bike)}}.to raise_error "FULL"
+	end
+
 	it 'has no bikes' do
 		expect(container).not_to have_bikes
 	end				

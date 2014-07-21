@@ -4,12 +4,13 @@ class Garage
 
 	include BikeContainer
 
-	def initialize(bikes=[])
+	def initialize(bikes=[], capacity=400)
 		@bikes = bikes
+		@capacity = capacity
 	end
 
 	def fix_bikes
-		@bikes.first.fix!
+		broken_bikes.each {|bike| bike.fix!}
 	end
 
 end

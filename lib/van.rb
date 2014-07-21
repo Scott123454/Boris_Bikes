@@ -5,8 +5,9 @@ class Van
 	alias :fixed_bikes :available_bikes
 	alias :load :dock
 
-	def initialize(bikes=[])
+	def initialize(bikes=[], capacity=10)
 		@bikes = bikes
+		@capacity = capacity
 	end
 
 	def pickup_broken_bikes_from(place)
