@@ -49,7 +49,7 @@ shared_examples BikeContainer do
 	end
 
 	it 'drops broken bikes at a place' do
-		place = double :place
+		place = double :place, full?: false
 		bike = double :bike, broken?: true
 		container = described_class.new([bike])
 		expect(place).to receive(:dock)
@@ -57,11 +57,19 @@ shared_examples BikeContainer do
 	end
 
 	it 'drops fixed bikes into a place' do
-		place = double :place
+		place = double :place, full?: false
 		bike = double :bike, broken?: false
 		container = described_class.new([bike])
 		expect(place).to receive(:dock)
 		container.drop_bikes_into(place)
+	end
+
+	it 'will not drop a bike into a full container' do
+		bike = double :bike, broken?: false
+		container = described_class.new([bike])
+		to_drop_into = described_class.new([], 0)
+		expect(to_drop_into).not_to receive(:dock)
+		container.drop_bikes_into(to_drop_into)
 	end
 
 	context 'releasing broken bikes' do
@@ -71,13 +79,13 @@ shared_examples BikeContainer do
 		let(:container_with_two) {described_class.new([broken_bike, broken_bike_two])}
 
 		it 'can release all broken bikes to a van' do
-			van = double :van
+			van = double :van, full?: false
 			expect(van).to receive(:dock).twice
 			container_with_two.drop_broken_bikes_into(van)
 		end
 
 		it 'has no bikes after releasing the broken bikes' do
-			van = double :van, dock: nil
+			van = double :van, dock: nil, full?: false
 			container_with_two.drop_broken_bikes_into(van)
 			expect(container_with_two).not_to have_bikes
 		end
